@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace GameOfLife
 {
@@ -35,6 +36,22 @@ namespace GameOfLife
             {
                 cell.UpdateState();
             }
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            for (var i = 0; i < Size; i++)
+            {
+                for (var j = 0; j < Size; j++)
+                {
+                    sb.Append(CellAt(i, j) + " ");
+                }
+
+                sb.Append(Environment.NewLine);
+            }
+
+            return sb.ToString();
         }
 
         private void CalculateNextGeneration()

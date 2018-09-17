@@ -36,5 +36,12 @@ namespace GameOfLife
         {
             Neighbors = neighbors;
         }
+
+        public override string ToString()
+        {
+            return State
+                ? "o"
+                : " ";
+        }
     }
 }
