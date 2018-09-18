@@ -7,25 +7,28 @@ namespace GameOfLife
 {
     public class Game
     {
-        public int Size { get; }
         public Cell[] Cells { get; }
 
         private int FlatSize =>
-            Size * Size;
+            Height * Width;
 
-        public Game(int size, IEnumerable<(int x, int y)> initialLivingCells)
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+        public Game(int height, int width, IEnumerable<(int x, int y)> initialLivingCells)
         {
             if (initialLivingCells == null)
                 throw new ArgumentException(nameof(initialLivingCells));
 
-            Size = size;
+            Width = width;
+            Height = height;
             Cells = new Cell[FlatSize];
             InitGame(initialLivingCells);
         }
 
         public Cell CellAt(int x, int y)
         {
-            return Cells[x * Size + y];
+            return Cells[y * Width + x];
         }
 
         public void UpdateState()
@@ -41,11 +44,11 @@ namespace GameOfLife
         public override string ToString()
         {
             var sb = new StringBuilder();
-            for (var i = 0; i < Size; i++)
+            for (var y = 0; y < Height; y++)
             {
-                for (var j = 0; j < Size; j++)
+                for (var x = 0; x < Width; x++)
                 {
-                    sb.Append(CellAt(i, j) + " ");
+                    sb.Append(CellAt(x, y) + " ");
                 }
 
                 sb.Append(Environment.NewLine);
@@ -70,10 +73,10 @@ namespace GameOfLife
 
         private void InitCells(IReadOnlyCollection<(int x, int y)> initialLivingCells)
         {
-            for (var i = 0; i < Size; i++)
-                for (var j = 0; j < Size; j++)
+            for (var y = 0; y < Height; y++)
+                for (var x = 0; x < Width; x++)
                 {
-                    Cells[i * Size + j] = new Cell(i, j, initialLivingCells.Any(c => c.x == i && c.y == j));
+                    Cells[y * Width + x] = new Cell(x, y, initialLivingCells.Any(c => c.x == y && c.y == x));
                 }
         }
 

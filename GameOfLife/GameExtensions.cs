@@ -14,7 +14,7 @@ namespace GameOfLife
         {
             return CoordinateDeltas
                 .Select(d => (coordinate.x + d.x, coordinate.y + d.y))
-                .Where(c => c.Item1 >= 0 && c.Item1 < game.Size && c.Item2 >= 0 && c.Item2 < game.Size);
+                .Where(c => c.Item1 >= 0 && c.Item1 < game.Width && c.Item2 >= 0 && c.Item2 < game.Height);
         }
     }
 }

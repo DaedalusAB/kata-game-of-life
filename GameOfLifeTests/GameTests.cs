@@ -10,12 +10,14 @@ namespace GameOfLifeTests
         [Fact]
         public void CreateAGameAllCellsShouldBeDead()
         {
+            var size = 2;
             var game = GameBuilder
-                .AGameOfSize(2)
+                .AGameOfSize(size)
                 .Build();
 
-            Assert.Equal(2, game.Size);
-            Assert.Equal(2 * 2, game.Cells.Count());
+            Assert.Equal(size, game.Width);
+            Assert.Equal(size, game.Height);
+            Assert.Equal(size * size, game.Cells.Count());
             Assert.All(game.Cells, cell => Assert.False(cell.State));
         }
 
@@ -48,6 +50,20 @@ namespace GameOfLifeTests
             game.UpdateState();
 
             Assert.False(cell.State);
+        }
+
+        [Fact]
+        public void GameWithWidthAndHeigthWhichAreDifferent()
+        {
+            var width = 2;
+            var height = 4;
+            var game = GameBuilder
+                .OfHeight(4)
+                .OfWidth(2)
+                .Build();
+
+            Assert.Equal(width, game.Width);
+            Assert.Equal(height, game.Height);
         }
     }
 }

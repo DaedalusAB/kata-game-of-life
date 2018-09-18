@@ -28,23 +28,23 @@ namespace GameOfLifeConsole
             using (var reader = new StreamReader(fileName))
             {
                 var line = reader.ReadLine();
-                var gameSize = line.Length;
-                var lineNum = 0;
+                var gameWidth = line.Length;
+                var gameHeight = 0;
                 var initialState = new List<(int, int)>();
 
                 while (line != null)
                 {
-                    for (var i = 0; i < gameSize; i++)
+                    for (var i = 0; i < gameWidth; i++)
                     {
                         if(line[i] == 'o')
-                            initialState.Add((lineNum, i));
+                            initialState.Add((gameHeight, i));
                     }
 
                     line = reader.ReadLine();
-                    lineNum++;
+                    gameHeight++;
                 }
 
-                return new Game(gameSize, initialState);
+                return new Game(gameHeight, gameWidth, initialState);
             }
         }
     }
