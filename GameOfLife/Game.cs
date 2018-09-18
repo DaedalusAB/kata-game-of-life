@@ -44,7 +44,7 @@ namespace GameOfLife
             return Cells[y * Width + x];
         }
 
-        public Game UpdateState()
+        public Game NextGeneration()
         {
             var nextCells = new Cell[FlatSize];
             for (var y = 0; y < Height; y++)
@@ -96,8 +96,8 @@ namespace GameOfLife
         public IEnumerable<(int x, int y)> CoordinatesOfAllNeighbors((int x, int y) coordinate)
         {
             return CoordinateDeltas
-                .Select(d => (coordinate.x + d.x, coordinate.y + d.y))
-                .Where(c => c.Item1 >= 0 && c.Item1 < Width && c.Item2 >= 0 && c.Item2 < Height);
+                .Select(d => (x: coordinate.x + d.x, y: coordinate.y + d.y))
+                .Where(c => c.x >= 0 && c.x < Width && c.y >= 0 && c.y < Height);
         }
     }
 }

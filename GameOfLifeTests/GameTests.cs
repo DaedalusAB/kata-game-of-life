@@ -48,7 +48,7 @@ namespace GameOfLifeTests
                 .Build();
 
 
-            var gameAfter = game.UpdateState();
+            var gameAfter = game.NextGeneration();
             var cellAfter = gameAfter.CellAt(0, 0);
 
             Assert.False(cellAfter.State);

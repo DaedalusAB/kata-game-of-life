@@ -18,7 +18,7 @@ namespace GameOfLifeConsole
 
                 Thread.Sleep(200);
                 Console.Clear();
-                game = game.UpdateState();
+                game = game.NextGeneration();
             }
         }
 
