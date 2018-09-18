@@ -10,7 +10,7 @@ namespace GameOfLifeConsole
     {
         public static void Main(string[] args)
         {
-            var game = StartGameFromFile("oscilator3.txt");
+            var game = StartGameFromFile("acorn.txt");
             
             while (true)
             {

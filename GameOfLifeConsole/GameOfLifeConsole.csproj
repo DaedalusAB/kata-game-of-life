@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="acorn.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="glider.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
