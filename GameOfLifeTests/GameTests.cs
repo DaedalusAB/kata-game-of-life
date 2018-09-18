@@ -10,8 +10,8 @@ namespace GameOfLifeTests
         [Fact]
         public void GameWithWidthAndHeigthWhichAreDifferent()
         {
-            var width = 2;
-            var height = 4;
+            const int width = 2;
+            const int height = 4;
             var game = GameBuilder
                 .OfHeight(4)
                 .OfWidth(2)
@@ -53,7 +53,5 @@ namespace GameOfLifeTests
 
             Assert.False(cellAfter.State);
         }
-
-        
     }
 }

@@ -20,7 +20,7 @@ namespace GameOfLifeTests
         }
 
         [Fact]
-        public void UpdateALivingCellWith_LessThanTwoLivingNeighbors_Dies()
+        public void ALivingCellWith_LessThanTwoLivingNeighbors_Dies()
         {
             var cell = CellBuilder
                 .ALivingCell()
@@ -33,7 +33,7 @@ namespace GameOfLifeTests
         }
 
         [Fact]
-        public void UpdateALivingCellWith_TwoNeighbors_Survives()
+        public void ALivingCellWith_TwoNeighbors_Survives()
         {
             var cell = CellBuilder
                 .ALivingCell()
@@ -46,7 +46,7 @@ namespace GameOfLifeTests
         }
 
         [Fact]
-        public void UpdateALivingCellWith_ThreeNeighbors_Survives()
+        public void ALivingCellWith_ThreeNeighbors_Survives()
         {
             var cell = CellBuilder
                 .ALivingCell()
@@ -59,7 +59,7 @@ namespace GameOfLifeTests
         }
 
         [Fact]
-        public void UpdateALivingCellWith_MoreThanThreeNeighbors_Dies()
+        public void ALivingCellWith_MoreThanThreeNeighbors_Dies()
         {
             var cell = CellBuilder
                 .ALivingCell()
@@ -72,7 +72,7 @@ namespace GameOfLifeTests
         }
 
         [Fact]
-        public void UpdateADeadCellWith_LessThanThreeNeighbors_StaysDead()
+        public void ADeadCellWith_LessThanThreeNeighbors_StaysDead()
         {
             var cell = CellBuilder
                 .ADeadCell()
@@ -85,7 +85,7 @@ namespace GameOfLifeTests
         }
 
         [Fact]
-        public void UpdateADeadCellWith_ThreeNeighbors_ComesToLife()
+        public void ADeadCellWith_ThreeNeighbors_ComesToLife()
         {
             var cell = CellBuilder
                 .ADeadCell()
@@ -98,7 +98,7 @@ namespace GameOfLifeTests
         }
 
         [Fact]
-        public void UpdateADeadCellWith_MoreThanThreeNeighbors_StaysDead()
+        public void ADeadCellWith_MoreThanThreeNeighbors_StaysDead()
         {
             var cell = CellBuilder
                 .ADeadCell()
