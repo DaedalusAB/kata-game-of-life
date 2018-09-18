@@ -50,7 +50,7 @@ namespace GameOfLife
             for (var y = 0; y < Height; y++)
                 for (var x = 0; x < Width; x++)
                     nextCells[y * Width + x] = CellAt(x, y).CalculateNextState();
-            
+
             return new Game(Height, Width, nextCells);
         }
 
@@ -63,7 +63,6 @@ namespace GameOfLife
                 {
                     sb.Append(CellAt(x, y) + " ");
                 }
-
                 sb.Append(Environment.NewLine);
             }
 
@@ -74,17 +73,14 @@ namespace GameOfLife
         {
             for (var y = 0; y < Height; y++)
                 for (var x = 0; x < Width; x++)
-                {
                     Cells[y * Width + x] = new Cell(x, y, initialLivingCells.Any(c => c.x == y && c.y == x));
-                }
+
         }
 
         private void CalculateNeighbors()
         {
             foreach (var cell in Cells)
-            {
                 cell.SetNeighbors(AllNeighborsOf((cell.X, cell.Y)));
-            }
         }
 
         private IEnumerable<Cell> AllNeighborsOf((int x, int y) cellCoordinates)
