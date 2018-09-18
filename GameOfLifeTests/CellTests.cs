@@ -27,9 +27,9 @@ namespace GameOfLifeTests
                 .WithLivingNeighbors(1)
                 .Build();
 
-            cell.CalculateNextState();
+            var cellAfter = cell.CalculateNextState();
 
-            Assert.False(cell.NextState);
+            Assert.False(cellAfter.State);
         }
 
         [Fact]
@@ -40,9 +40,9 @@ namespace GameOfLifeTests
                 .WithLivingNeighbors(2)
                 .Build();
 
-            cell.CalculateNextState();
+            var cellAfter = cell.CalculateNextState();
 
-            Assert.True(cell.NextState);
+            Assert.True(cellAfter.State);
         }
 
         [Fact]
@@ -53,9 +53,9 @@ namespace GameOfLifeTests
                 .WithLivingNeighbors(3)
                 .Build();
 
-            cell.CalculateNextState();
+            var cellAfter = cell.CalculateNextState();
 
-            Assert.True(cell.NextState);
+            Assert.True(cellAfter.State);
         }
 
         [Fact]
@@ -66,9 +66,9 @@ namespace GameOfLifeTests
                 .WithLivingNeighbors(4)
                 .Build();
 
-            cell.CalculateNextState();
+            var cellAfter = cell.CalculateNextState();
 
-            Assert.False(cell.NextState);
+            Assert.False(cellAfter.State);
         }
 
         [Fact]
@@ -79,9 +79,9 @@ namespace GameOfLifeTests
                 .WithLivingNeighbors(2)
                 .Build();
 
-            cell.CalculateNextState();
+            var cellAfter = cell.CalculateNextState();
 
-            Assert.False(cell.NextState);
+            Assert.False(cellAfter.State);
         }
 
         [Fact]
@@ -92,9 +92,9 @@ namespace GameOfLifeTests
                 .WithLivingNeighbors(3)
                 .Build();
 
-            cell.CalculateNextState();
+            var cellAfter = cell.CalculateNextState();
 
-            Assert.True(cell.NextState);
+            Assert.True(cellAfter.State);
         }
 
         [Fact]
@@ -105,23 +105,9 @@ namespace GameOfLifeTests
                 .WithLivingNeighbors(4)
                 .Build();
 
-            cell.CalculateNextState();
+            var cellAfter = cell.CalculateNextState();
 
-            Assert.False(cell.NextState);
-        }
-
-        [Fact]
-        public void CellMutatesIntoNextState()
-        {
-            var cell = CellBuilder
-                .ALivingCell()
-                .WithLivingNeighbors(4)
-                .Build();
-
-            cell.CalculateNextState();
-            cell.UpdateState();
-
-            Assert.False(cell.State);
+            Assert.False(cellAfter.State);
         }
     }
 }

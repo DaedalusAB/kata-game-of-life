@@ -11,15 +11,14 @@ namespace GameOfLifeConsole
         public static void Main(string[] args)
         {
             var game = StartGameFromFile("oscilator3.txt");
-
-
+            
             while (true)
             {
                 Console.Write(game.ToString());
 
                 Thread.Sleep(200);
                 Console.Clear();
-                game.UpdateState();
+                game = game.UpdateState();
             }
         }
 

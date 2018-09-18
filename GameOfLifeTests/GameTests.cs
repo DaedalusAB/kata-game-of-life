@@ -8,16 +8,18 @@ namespace GameOfLifeTests
         private GameBuilder GameBuilder => new GameBuilder();
 
         [Fact]
-        public void CreateAGameAllCellsShouldBeDead()
+        public void GameWithWidthAndHeigthWhichAreDifferent()
         {
-            var size = 2;
+            var width = 2;
+            var height = 4;
             var game = GameBuilder
-                .AGameOfSize(size)
+                .OfHeight(4)
+                .OfWidth(2)
                 .Build();
 
-            Assert.Equal(size, game.Width);
-            Assert.Equal(size, game.Height);
-            Assert.Equal(size * size, game.Cells.Count());
+            Assert.Equal(width, game.Width);
+            Assert.Equal(height, game.Height);
+            Assert.Equal(width * height, game.Cells.Count());
             Assert.All(game.Cells, cell => Assert.False(cell.State));
         }
 
@@ -45,25 +47,13 @@ namespace GameOfLifeTests
                 .WithLivingCellAt(0, 0)
                 .Build();
 
-            var cell = game.CellAt(0, 0);
 
-            game.UpdateState();
+            var gameAfter = game.UpdateState();
+            var cellAfter = gameAfter.CellAt(0, 0);
 
-            Assert.False(cell.State);
+            Assert.False(cellAfter.State);
         }
 
-        [Fact]
-        public void GameWithWidthAndHeigthWhichAreDifferent()
-        {
-            var width = 2;
-            var height = 4;
-            var game = GameBuilder
-                .OfHeight(4)
-                .OfWidth(2)
-                .Build();
-
-            Assert.Equal(width, game.Width);
-            Assert.Equal(height, game.Height);
-        }
+        
     }
 }

@@ -8,22 +8,35 @@ namespace GameOfLife
     public class Game
     {
         public Cell[] Cells { get; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         private int FlatSize =>
             Height * Width;
 
-        public int Width { get; set; }
-        public int Height { get; set; }
+        private static readonly (int x, int y)[] CoordinateDeltas =
+        {
+            (-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)
+        };
 
         public Game(int height, int width, IEnumerable<(int x, int y)> initialLivingCells)
         {
             if (initialLivingCells == null)
                 throw new ArgumentException(nameof(initialLivingCells));
 
-            Width = width;
             Height = height;
+            Width = width;
             Cells = new Cell[FlatSize];
-            InitGame(initialLivingCells);
+            InitCells(initialLivingCells.ToList());
+            CalculateNeighbors();
+        }
+
+        private Game(int height, int width, IEnumerable<Cell> cells)
+        {
+            Height = height;
+            Width = width;
+            Cells = cells.ToArray();
+            CalculateNeighbors();
         }
 
         public Cell CellAt(int x, int y)
@@ -31,14 +44,14 @@ namespace GameOfLife
             return Cells[y * Width + x];
         }
 
-        public void UpdateState()
+        public Game UpdateState()
         {
-            CalculateNextGeneration();
-
-            foreach (var cell in Cells)
-            {
-                cell.UpdateState();
-            }
+            var nextCells = new Cell[FlatSize];
+            for (var y = 0; y < Height; y++)
+                for (var x = 0; x < Width; x++)
+                    nextCells[y * Width + x] = CellAt(x, y).CalculateNextState();
+            
+            return new Game(Height, Width, nextCells);
         }
 
         public override string ToString()
@@ -55,20 +68,6 @@ namespace GameOfLife
             }
 
             return sb.ToString();
-        }
-
-        private void CalculateNextGeneration()
-        {
-            foreach (var cell in Cells)
-            {
-                cell.CalculateNextState();
-            }
-        }
-
-        private void InitGame(IEnumerable<(int x, int y)> initialLivingCells)
-        {
-            InitCells(initialLivingCells.ToList());
-            CalculateNeighbors();
         }
 
         private void InitCells(IReadOnlyCollection<(int x, int y)> initialLivingCells)
@@ -90,8 +89,15 @@ namespace GameOfLife
 
         private IEnumerable<Cell> AllNeighborsOf((int x, int y) cellCoordinates)
         {
-            return this.CoordinatesOfAllNeighbors(cellCoordinates)
+            return CoordinatesOfAllNeighbors(cellCoordinates)
                 .Select(neighbor => CellAt(neighbor.x, neighbor.y));
+        }
+
+        public IEnumerable<(int x, int y)> CoordinatesOfAllNeighbors((int x, int y) coordinate)
+        {
+            return CoordinateDeltas
+                .Select(d => (coordinate.x + d.x, coordinate.y + d.y))
+                .Where(c => c.Item1 >= 0 && c.Item1 < Width && c.Item2 >= 0 && c.Item2 < Height);
         }
     }
 }

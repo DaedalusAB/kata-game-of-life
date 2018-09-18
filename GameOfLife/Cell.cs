@@ -7,8 +7,7 @@ namespace GameOfLife
     {
         public int X { get; }
         public int Y { get; }
-        public bool State { get; private set; }
-        public bool NextState { get; private set; }
+        public bool State { get; }
         public IEnumerable<Cell> Neighbors { get; private set; }
 
         public Cell(int x, int y, bool state)
@@ -19,17 +18,12 @@ namespace GameOfLife
             Neighbors = new List<Cell>();
         }
 
-        public void CalculateNextState()
+        public Cell CalculateNextState()
         {
             var livingNeighbors = Neighbors.Count(c => c.State);
-            NextState = State
+            return new Cell(X, Y, State
                 ? livingNeighbors >= 2 && livingNeighbors < 4
-                : livingNeighbors == 3;
-        }
-
-        public void UpdateState()
-        {
-            State = NextState;
+                : livingNeighbors == 3);
         }
 
         public void SetNeighbors(IEnumerable<Cell> neighbors)
